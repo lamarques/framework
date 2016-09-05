@@ -1,2 +1,4 @@
 # framework
-framework php para meus projetos em geral
+framework php para projetos em geral de pequeno porte
+
+
