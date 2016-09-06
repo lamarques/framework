@@ -1,16 +1,25 @@
 {
-    "name": "lamarques/framework",
-    "description": "framework php para projetos em geral de pequeno porte",
-    "type": "project",
-    "require": {
-        "doctrine/orm": "^2.5"
-    },
-    "license": "Apache 2.0",
-    "authors": [
-        {
-            "name": "Rogerio Lamarques",
-            "email": "rogerio.lamarques@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev"
+  "name": "lamarques/framework",
+  "description": "framework php para projetos em geral de pequeno porte",
+  "type": "project",
+  "license": "Apache 2.0",
+  "authors": [
+    {
+      "name": "Rogerio Lamarques",
+      "email": "rogerio.lamarques@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "doctrine/orm": "^2.5",
+    "league/plates": "3.1.1"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-0": {
+      "Aplicacao\\": "Aplicacao/src/",
+      "Lamarques\\": "Lamarques/src/"
+    }
+  }
 }
