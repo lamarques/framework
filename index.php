@@ -15,9 +15,7 @@ try{
     $application = new Application($config);
     $application->start();
 } catch (Exception $e){
-    echo "<pre>";
-    print_r($e);
-    echo "<pre>";
+    echo $e->getMessage();
 }
 
 
