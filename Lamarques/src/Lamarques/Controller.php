@@ -9,18 +9,41 @@
 namespace Lamarques;
 
 
+use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManager;
+
 class Controller
 {
     public $params;
     public $db;
     public $config;
     public $view;
+    public $em;
+    public $sessao;
 
-    public function __construct(array $config)
+    public function __construct(array $config, $client = 'default')
     {
         $this->setConfig($config);
         $this->view = new View($config['current_state']);
+        $dbconfig = (isset($config['db'][$client])) ? $config['db'][$client] : $config['db']['default'];
+        $entityPath = (isset($config['entity'][$client])) ? $config['entity'][$client] : $config['entity']['default'];
+        $this->connectDb($dbconfig, $entityPath);
+        $sessao =  new Session($client);
+        $this->sessao = $sessao;
     }
+
+    /**
+     * @return Session
+     */
+    public function getSessao()
+    {
+        return $this->sessao;
+    }
+
+
 
     /**
      * @return mixed
@@ -71,9 +94,37 @@ class Controller
     }
 
     public function view($data){
-        $this->view->view($data);
+        return $this->view->view($data);
     }
 
+    /**
+     * @return EntityManager
+     */
+    public function getEm()
+    {
+        return $this->em;
+    }
 
+    /**
+     * @param EntityManager $em
+     */
+    public function setEm(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
+    private function connectDb(array $dbConfig, $entityPath)
+    {
+        $classLoader = new \Doctrine\Common\ClassLoader();
+        $classLoader->register();
+
+        $driver = new AnnotationDriver(new AnnotationReader(), $entityPath);
+        AnnotationRegistry::registerLoader('class_exists');
+
+        $config = Setup::createAnnotationMetadataConfiguration($entityPath);
+        $config->setMetadataDriverImpl($driver);
+        $entityManager = EntityManager::create($dbConfig, $config);
+        $this->setEm($entityManager);
+    }
 
 }

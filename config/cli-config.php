@@ -8,7 +8,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $isDevMode = true;
-$config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration([__DIR__ . "/../Aplicacao/src/Aplicacao/Entity"], $isDevMode);
+$config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration([__DIR__ . "/../Aplicacao/src"], $isDevMode);
 $conn = array(
     'dbname' => 'framework',
     'user' => 'postgres',
