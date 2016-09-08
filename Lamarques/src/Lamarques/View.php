@@ -27,6 +27,7 @@ class View extends Engine
 
     public function view($data){
         echo $this->render($this->action, $data);
+        return true;
     }
 
 }

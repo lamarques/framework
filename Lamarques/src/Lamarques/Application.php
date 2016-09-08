@@ -68,7 +68,7 @@ class Application
             'action' => $action
         ];
         $class = "\\" . ucfirst($module) . "\\Controller\\" . ucfirst($controller) . "Controller";
-        $instancia = new $class($this->getConfig());
+        $instancia = new $class($this->getConfig(), $this->getClient());
         $object = $action . 'Action';
         $instancia->$object();
 
@@ -136,6 +136,10 @@ class Application
     public function setConfig($config)
     {
         $this->config = $config;
+    }
+
+    public function getClient(){
+        return $this->uri->getClient();
     }
 
 
