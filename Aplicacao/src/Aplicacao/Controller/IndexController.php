@@ -23,6 +23,7 @@ class IndexController extends Controller
             $auth->logOf();
             header('location: /Aplicacao/Login');
         }
+
     }
 
     public function indexAction(){

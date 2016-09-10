@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Sistema.usuarios
  *
- * @ORM\Table(schema="sistema",name=".usuarios")
+ * @ORM\Table(name="sistema.usuarios")
  * @ORM\Entity
  */
 class SistemaUsuarios

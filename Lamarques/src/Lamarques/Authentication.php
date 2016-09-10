@@ -16,6 +16,7 @@ class Authentication
 {
     private $sessao;
     private $em;
+    private $usuario;
 
     /**
      * authentication constructor.
@@ -51,11 +52,12 @@ class Authentication
         $dadosUsuario = $usuarios->findOneBy($usuario);
         echo "<pre>";
         if($dadosUsuario->getIdUsuarios() && $dadosUsuario->isAtivo()){
+            $permissoes = new Permissoes($this->em, $dadosUsuario);
             $this->sessao->setSession([
                 'islogged' => true,
                 'usuario' => $dadosUsuario->getUsuario(),
                 'email' => $dadosUsuario->getEmail(),
-                'permissoes' => []
+                'permissoes' => $permissoes->getPermissoes()
             ]);
             return true;
         }

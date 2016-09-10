@@ -44,9 +44,9 @@ class SistemaPermissoes
     private $especial = false;
 
     /**
-     * @var \Aplicacao\Entity\Sistema.usuarios
+     * @var \Aplicacao\Entity\SistemaUsuarios
      *
-     * @ORM\ManyToOne(targetEntity="Aplicacao\Entity\Sistema.usuarios")
+     * @ORM\ManyToOne(targetEntity="Aplicacao\Entity\SistemaUsuarios")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_usuarios", referencedColumnName="id_usuarios")
      * })
@@ -54,9 +54,9 @@ class SistemaPermissoes
     private $idUsuarios;
 
     /**
-     * @var \Aplicacao\Entity\Sistema.modulos
+     * @var \Aplicacao\Entity\SistemaModulos
      *
-     * @ORM\ManyToOne(targetEntity="Aplicacao\Entity\Sistema.modulos")
+     * @ORM\ManyToOne(targetEntity="Aplicacao\Entity\SistemaModulos")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_modulos", referencedColumnName="id_modulos")
      * })
