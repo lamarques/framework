@@ -1,7 +1,6 @@
-<?php $this->insert('../partials/header') ?>
+<?php $this->layout('../template', ['menu'=>$menu, 'sessao'=>$sessao]) ?>
 <h1>Primeira View</h1>
 
 <pre>
-    <?php print_r($sessao); ?>
+<?php print_r($sessao) ?>
 </pre>
-<?php $this->insert('../partials/footer') ?>

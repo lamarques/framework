@@ -14,10 +14,11 @@ use League\Plates\Engine;
 class View extends Engine
 {
     public $action = '';
+    public $globalData = [];
 
     /**
      * View constructor.
-     * @param string $dir
+     * @param array $state
      */
     public function __construct(array $state)
     {
@@ -25,9 +26,33 @@ class View extends Engine
         $this->action = $state['action'];
     }
 
-    public function view($data){
+    public function view($data)
+    {
+        $data = array_merge($data, $this->getGlobalData());
         echo $this->render($this->action, $data);
         return true;
     }
+
+    public function renderTemplate($template){
+        $this->setDirectory(__DIR__ . "/../../../Aplicacao/src/Aplicacao/View/partials/");
+        $this->renderTemplate($template);
+    }
+
+    /**
+     * @return array
+     */
+    public function getGlobalData()
+    {
+        return $this->globalData;
+    }
+
+    /**
+     * @param array $globalData
+     */
+    public function setGlobalData($key, $data)
+    {
+        $this->globalData[$key] = $data;
+    }
+
 
 }

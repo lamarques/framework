@@ -23,7 +23,6 @@ class IndexController extends Controller
             $auth->logOf();
             header('location: /Aplicacao/Login');
         }
-
     }
 
     public function indexAction(){
@@ -31,9 +30,8 @@ class IndexController extends Controller
         $usuarios = $em->getRepository('Aplicacao\Entity\SistemaUsuarios');
         $dados = $usuarios->findAll();
         return $this->view([
-            'nome' => 'joao da cruz',
-            'dados' => $dados,
-            'sessao' => $this->getSessao(),
+//            'dados' => $dados,
+//            'sessao' => $this->getSessao(),
         ]);
     }
 

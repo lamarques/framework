@@ -23,6 +23,7 @@ class Controller
     public $view;
     public $em;
     public $sessao;
+    public $menu;
 
     public function __construct(array $config, $client = 'default')
     {
@@ -33,6 +34,12 @@ class Controller
         $this->connectDb($dbconfig, $entityPath);
         $sessao =  new Session($client);
         $this->sessao = $sessao;
+        if($this->getSessao()->getSession()) {
+            $menu = new Menu($this->getSessao()->getSession()['permissoes']);
+            $this->menu = $menu->getMenu();
+            $this->view->setGlobalData('menu', $this->menu);
+            $this->view->setGlobalData('sessao', $this->getSessao()->getSession());
+        }
     }
 
     /**

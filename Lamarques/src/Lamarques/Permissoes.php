@@ -29,12 +29,10 @@ class Permissoes
 
     public function setPemissoes()
     {
-        $query = $this->em->createQuery('SELECT p, m FROM Aplicacao\Entity\SistemaPermissoes p JOIN p.idModulos m WHERE p.idUsuarios = ?1');
+        $query = $this->em->createQuery('SELECT p, m FROM Aplicacao\Entity\SistemaPermissoes p JOIN p.idModulos m WHERE p.idUsuarios = ?1 ORDER  BY m.modulo ASC, m.order ASC');
         $query->setParameter(1, $this->usuario->getIdUsuarios());
         $query->execute();
         $this->permissoes = $query->getArrayResult();
-        print_r($this->permissoes);
-        exit;
     }
 
     public function getPermissoes()
