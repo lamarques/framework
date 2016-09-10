@@ -25,6 +25,12 @@ class SistemaModulos
     /**
      * @var string
      *
+     * @ORM\Column(name="menu", type="string", length=255, nullable=false)
+     */
+    private $menu;
+    /**
+     * @var string
+     *
      * @ORM\Column(name="modulo", type="string", length=255, nullable=false)
      */
     private $modulo;
