@@ -15,9 +15,9 @@ use Lamarques\Controller;
 class IndexController extends Controller
 {
 
-    public function __construct(array $config, $client)
+    public function __construct(array $config, $client, $uri)
     {
-        parent::__construct($config, $client);
+        parent::__construct($config, $client, $uri);
         $auth = new Authentication($this->getEm(), $this->getSessao());
         if(!$auth->isLogged()){
             $auth->logOf();

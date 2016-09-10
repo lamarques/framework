@@ -53,9 +53,119 @@ class SistemaModulos
     /**
      * @var integer
      *
-     * @ORM\Column(name="order", type="integer", nullable=true)
+     * @ORM\Column(name="ordem", type="integer", nullable=true)
      */
-    private $order;
+    private $ordem;
+
+    /**
+     * @return int
+     */
+    public function getIdModulos()
+    {
+        return $this->idModulos;
+    }
+
+    /**
+     * @param int $idModulos
+     * @return $this
+     */
+    public function setIdModulos($idModulos)
+    {
+        $this->idModulos = $idModulos;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModulo()
+    {
+        return $this->modulo;
+    }
+
+    /**
+     * @param string $modulo
+     * @return $this
+     */
+    public function setModulo($modulo)
+    {
+        $this->modulo = $modulo;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMenu()
+    {
+        return $this->menu;
+    }
+
+    /**
+     * @param string $menu
+     * @return $this
+     */
+    public function setMenu($menu)
+    {
+        $this->menu = $menu;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHref()
+    {
+        return $this->href;
+    }
+
+    /**
+     * @param string $href
+     * @return $this
+     */
+    public function setHref($href)
+    {
+        $this->href = $href;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isExibir()
+    {
+        return $this->exibir;
+    }
+
+    /**
+     * @param boolean $exibir
+     * @return $this
+     */
+    public function setExibir($exibir)
+    {
+        $this->exibir = (bool)$exibir;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrdem()
+    {
+        return $this->ordem;
+    }
+
+    /**
+     * @param int $order
+     * @return $this
+     */
+    public function setOrdem($ordem)
+    {
+        $this->ordem = $ordem;
+        return $this;
+    }
+
+
 
 }
 

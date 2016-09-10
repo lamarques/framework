@@ -17,7 +17,6 @@ use Doctrine\ORM\EntityManager;
 
 class Controller
 {
-    public $params;
     public $db;
     public $config;
     public $view;
@@ -25,7 +24,9 @@ class Controller
     public $sessao;
     public $menu;
 
-    public function __construct(array $config, $client = 'default')
+    private $uri;
+
+    public function __construct(array $config, $client = 'default', Uri $uri)
     {
         $this->setConfig($config);
         $this->view = new View($config['current_state']);
@@ -34,6 +35,7 @@ class Controller
         $this->connectDb($dbconfig, $entityPath);
         $sessao =  new Session($client);
         $this->sessao = $sessao;
+        $this->uri = $uri;
         if($this->getSessao()->getSession()) {
             $menu = new Menu($this->getSessao()->getSession()['permissoes']);
             $this->menu = $menu->getMenu();
@@ -55,17 +57,9 @@ class Controller
     /**
      * @return mixed
      */
-    public function getParams()
+    public function getParams($param)
     {
-        return $this->params;
-    }
-
-    /**
-     * @param mixed $params
-     */
-    public function setParams($params)
-    {
-        $this->params = $params;
+        return $this->uri->getUri($param);
     }
 
     /**

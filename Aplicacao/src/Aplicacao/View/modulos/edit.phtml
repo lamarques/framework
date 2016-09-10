@@ -1,0 +1,59 @@
+<?php $this->layout('../template', ['menu' => $menu, 'sessao' => $sessao]) ?>
+<h1>Editar Menu</h1>
+<form action="/aplicacao/modulos/edit/<?= $modulo->getIdModulos() ?>/salvar" method="post" id="frmModulos">
+    <?php
+    /**
+     * @var \Aplicacao\Entity\SistemaModulos $modulo
+     */
+    ?>
+<div class="form-group">
+    <input type="hidden" name="idModulos" id="idModulos" value="<?= $modulo->getIdModulos() ?>">
+    <div class="row">
+        <div class="col-md-1 text-right">
+            <label for="modulo">Modulo</label>
+        </div>
+        <div class="col-md-11">
+            <input type="text" name="modulo" id="modulo" class="form-control" value="<?= $modulo->getModulo() ?>" required="required">
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-1 text-right">
+            <label for="menu">Menu</label>
+        </div>
+        <div class="col-md-11">
+            <input type="text" name="menu" id="menu" class="form-control" value="<?= $modulo->getMenu() ?>" required="required">
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-1 text-right">
+            <label for="href">Href</label>
+        </div>
+        <div class="col-md-11">
+            <input type="text" name="href" id="href" class="form-control" value="<?= $modulo->getHref() ?>" required="required">
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-1 text-right">
+            <label for="order">Ordem</label>
+        </div>
+        <div class="col-md-5">
+            <input type="text" name="ordem" id="ordem" class="form-control" value="<?= $modulo->getOrdem() ?>">
+        </div>
+        <div class="col-md-6">
+            <input type="checkbox" name="exibir" id="exibir" class="form-inline" <?php if($modulo->isExibir()){ ?>checked<?php } ?>>
+            Exibir no Menu
+        </div>
+    </div>
+</div>
+<div class="form-group form-actions text-center">
+    <button type="submit" class="btn btn-primary" id="enviar">Salvar</button>
+    <a href="/aplicacao/modulos" type="button" class="btn btn-default" id="cancelar">Canelar</a>
+</div>
+</form>
+<script type="text/javascript" src="/public/vendors/validator/validator.js"></script>
