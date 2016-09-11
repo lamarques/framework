@@ -1,0 +1,52 @@
+<?php $this->layout('../template', ['menu'=>$menu, 'sessao'=>$sessao]) ?>
+<h1>Listagem de Usuários</h1>
+<p>
+    <a class="btn btn-default" href="/aplicacao/usuarios/add">Novo Usuário</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Usuário</th>
+        <th>E-mail</th>
+        <th>Ativo</th>
+        <th>Ação</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($dados as $dado): ?>
+        <?php
+        /**
+         * @var \Aplicacao\Entity\SistemaUsuarios $dado
+         */
+        ?>
+        <tr>
+            <td><?= $dado->getIdUsuarios() ?></td>
+            <td><?= $dado->getUsuario() ?></td>
+            <td><?= $dado->getEmail() ?></td>
+            <td>
+            <?php if($dado->isAtivo()):  ?>
+                Sim
+            <?php else:  ?>
+                Não
+            <?php endif;  ?>
+            </td>
+            <td>
+                <a href="/aplicacao/usuarios/password/<?= $dado->getIdUsuarios() ?>"><i class="fa fa-lock"></i></a>
+                <a href="/aplicacao/usuarios/edit/<?= $dado->getIdUsuarios() ?>"><i class="fa fa-pencil"></i></a>
+                <a href="/aplicacao/usuarios/delete/<?= $dado->getIdUsuarios() ?>" class="deletar"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.deletar').click(function() {
+            if(!confirm('Você tem certez que vai deletar esse usuário?')){
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
