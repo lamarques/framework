@@ -63,6 +63,115 @@ class SistemaPermissoes
      */
     private $idModulos;
 
+    /**
+     * @return int
+     */
+    public function getIdPermissoes()
+    {
+        return $this->idPermissoes;
+    }
+
+    /**
+     * @param int $idPermissoes
+     * @return SistemaPermissoes
+     */
+    public function setIdPermissoes($idPermissoes)
+    {
+        $this->idPermissoes = $idPermissoes;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isLeitura()
+    {
+        return $this->leitura;
+    }
+
+    /**
+     * @param boolean $leitura
+     * @return SistemaPermissoes
+     */
+    public function setLeitura($leitura)
+    {
+        $this->leitura = $leitura;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEscrita()
+    {
+        return $this->escrita;
+    }
+
+    /**
+     * @param boolean $escrita
+     * @return SistemaPermissoes
+     */
+    public function setEscrita($escrita)
+    {
+        $this->escrita = $escrita;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEspecial()
+    {
+        return $this->especial;
+    }
+
+    /**
+     * @param boolean $especial
+     * @return SistemaPermissoes
+     */
+    public function setEspecial($especial)
+    {
+        $this->especial = $especial;
+        return $this;
+    }
+
+    /**
+     * @return SistemaUsuarios
+     */
+    public function getIdUsuarios()
+    {
+        return $this->idUsuarios;
+    }
+
+    /**
+     * @param SistemaUsuarios $idUsuarios
+     * @return SistemaPermissoes
+     */
+    public function setIdUsuarios($idUsuarios)
+    {
+        $this->idUsuarios = $idUsuarios;
+        return $this;
+    }
+
+    /**
+     * @return SistemaModulos
+     */
+    public function getIdModulos()
+    {
+        return $this->idModulos;
+    }
+
+    /**
+     * @param SistemaModulos $idModulos
+     * @return SistemaPermissoes
+     */
+    public function setIdModulos($idModulos)
+    {
+        $this->idModulos = $idModulos;
+        return $this;
+    }
+
+
 
 }
 

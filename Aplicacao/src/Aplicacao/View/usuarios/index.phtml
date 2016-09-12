@@ -32,6 +32,7 @@
             <?php endif;  ?>
             </td>
             <td>
+                <a href="/aplicacao/permissoes/index/<?= $dado->getIdUsuarios() ?>"><i class="fa fa-key"></i></a>
                 <a href="/aplicacao/usuarios/password/<?= $dado->getIdUsuarios() ?>"><i class="fa fa-lock"></i></a>
                 <a href="/aplicacao/usuarios/edit/<?= $dado->getIdUsuarios() ?>"><i class="fa fa-pencil"></i></a>
                 <a href="/aplicacao/usuarios/delete/<?= $dado->getIdUsuarios() ?>" class="deletar"><i class="fa fa-trash"></i></a>
@@ -43,7 +44,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('.deletar').click(function() {
-            if(!confirm('Você tem certez que vai deletar esse usuário?')){
+            if(!confirm('Você tem certeza que vai deletar esse usuário?')){
                 return false;
             }
             return true;

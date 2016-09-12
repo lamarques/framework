@@ -1,0 +1,84 @@
+<?php $this->layout('../template', ['menu' => $menu, 'sessao' => $sessao]) ?>
+<h1>Controle de Permissões de Usuário</h1>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Modulo</th>
+        <th>Menu</th>
+        <th>Href</th>
+        <th>Leiura</th>
+        <th>Escrita</th>
+        <th>Especial</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($dados as $dado): ?>
+        <tr>
+            <td><?= $dado['id_modulos'] ?> - <?= $dado['modulo'] ?></td>
+            <td><?= $dado['menu'] ?></td>
+            <td><?= $dado['href'] ?></td>
+            <td>
+                <input type="checkbox" name="leitura[]"
+                       id="leitura_<?= $dado['id_modulos'] ?>"
+                       value="<?= $dado['id_permissoes'] ?>"
+                       data-id_modulos="<?= $dado['id_modulos'] ?>"
+                       data-id_permissoes="<?= $dado['id_permissoes'] ?>"
+                       data-type="leitura"
+                       <?php if ($dado['leitura']): ?>checked<?php endif; ?> class="marcapermissao">
+            </td>
+            <td>
+                <input type="checkbox" name="escrita[]"
+                       id="escrita_<?= $dado['id_modulos'] ?>"
+                       value="<?= $dado['id_permissoes'] ?>"
+                       data-id_modulos="<?= $dado['id_modulos'] ?>"
+                       data-id_permissoes="<?= $dado['id_permissoes'] ?>"
+                       data-type="escrita"
+                       <?php if ($dado['escrita']): ?>checked<?php endif; ?> class="marcapermissao">
+            </td>
+            <td>
+                <input type="checkbox" name="especial[]"
+                       id="especial_<?= $dado['id_modulos'] ?>"
+                       value="<?= $dado['id_permissoes'] ?>"
+                       data-id_modulos="<?= $dado['id_modulos'] ?>"
+                       data-id_permissoes="<?= $dado['id_permissoes'] ?>"
+                       data-type="especial"
+                       <?php if ($dado['especial']): ?>checked<?php endif; ?> class="marcapermissao">
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.marcapermissao').change(function () {
+            var id_usuarios = <?= $idUsuarios ?>;
+            var id_modulos = $(this).attr('data-id_modulos');
+            var id_permissoes = $(this).val();
+            var campo = $(this).attr('data-type');
+            var op = ($(this).is(':checked')) ? true : false;
+
+            $.ajax({
+                url: '/aplicacao/permissoes/update',
+                data: {
+                    id_usuarios: id_usuarios,
+                    id_modulos: id_modulos,
+                    id_permissoes: id_permissoes,
+                    campo: campo,
+                    op: op
+                },
+                dataType: 'json',
+                type: 'post',
+                success: function(data){
+                    if(data.resultado === 'sim'){
+                        $('#leitura_' + id_modulos).val(data.id_permissoes);
+                        $('#escrita_' + id_modulos).val(data.id_permissoes);
+                        $('#especial_' + id_modulos).val(data.id_permissoes);
+                        alert('Permissão alterada.')
+                    } else {
+                        alert('Falha ao alterar permissão.')
+                    }
+                }
+            });
+        });
+    })
+</script>
