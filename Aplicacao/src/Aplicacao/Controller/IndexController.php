@@ -15,15 +15,14 @@ use Lamarques\Controller;
 class IndexController extends Controller
 {
 
-    public function __construct(array $config, $client)
+    public function __construct(array $config, $client, $uri)
     {
-        parent::__construct($config, $client);
+        parent::__construct($config, $client, $uri);
         $auth = new Authentication($this->getEm(), $this->getSessao());
         if(!$auth->isLogged()){
             $auth->logOf();
             header('location: /Aplicacao/Login');
         }
-
     }
 
     public function indexAction(){
@@ -31,9 +30,8 @@ class IndexController extends Controller
         $usuarios = $em->getRepository('Aplicacao\Entity\SistemaUsuarios');
         $dados = $usuarios->findAll();
         return $this->view([
-            'nome' => 'joao da cruz',
-            'dados' => $dados,
-            'sessao' => $this->getSessao(),
+//            'dados' => $dados,
+//            'sessao' => $this->getSessao(),
         ]);
     }
 

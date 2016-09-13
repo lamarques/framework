@@ -42,4 +42,8 @@ class LoginController extends Controller
         }
     }
 
+    public function acessonegadoAction(){
+        return $this->view([]);
+    }
+
 }

@@ -55,6 +55,7 @@ class Authentication
             $permissoes = new Permissoes($this->em, $dadosUsuario);
             $this->sessao->setSession([
                 'islogged' => true,
+                'id_usuario' => $dadosUsuario->getIdUsuarios(),
                 'usuario' => $dadosUsuario->getUsuario(),
                 'email' => $dadosUsuario->getEmail(),
                 'permissoes' => $permissoes->getPermissoes()

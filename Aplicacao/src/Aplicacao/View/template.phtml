@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Sistema Framework</title>
+
+    <!-- Bootstrap -->
+    <link href="/public/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/public/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/public/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="/public/build/css/custom.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="/public/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/public/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>Sistema Framework</span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile">
+                    <div class="profile_pic">
+                        <img src="/public/production/images/img.jpg" alt="" class="img-circle profile_img">
+                    </div>
+                    <div class="profile_info">
+                        <span>Bem Vindo,</span>
+                        <h2><?= $sessao['usuario'] ?></h2>
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br/>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>Menu</h3>
+                        <ul class="nav side-menu">
+                            <?php foreach ($menu as $key=>$m): ?>
+<!--                            <li><a><i class="fa fa-home"></i> --><?//=$key; ?><!-- <span class="fa fa-chevron-down"></span></a>-->
+                            <li><a><?=$key; ?> <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <?php foreach ($m as $me): ?>
+                                        <li><a href="<?= $me['href'] ?>"><?= $me['menu'] ?></a></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="/Aplicacao/login/logout">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="/public/production/images/img.jpg" alt=""><?= $sessao['usuario']; ?>
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="/Aplicacao/login/profile"> Profile</a></li>
+                                <li><a href="javascript:;">Ajuda</a></li>
+                                <li><a href="/Aplicacao/login/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <?= $this->section('content') ?>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+<!--        <footer>-->
+<!--            <div class="pull-right">-->
+<!--            </div>-->
+<!--            <div class="clearfix"></div>-->
+<!--        </footer>-->
+        <!-- /footer content -->
+    </div>
+</div>
+<script src="/public/vendors/fastclick/lib/fastclick.js"></script>
+<script src="/public/vendors/nprogress/nprogress.js"></script>
+<script src="/public/vendors/validator/validator.js"></script>
+<script src="/public/vendors/validator/multifield.js"></script>
+<!-- Custom Theme Scripts -->
+<script src="/public/build/js/custom.min.js"></script>
+<!-- validator -->
+<script>
+    // initialize the validator function
+    validator.message.date = 'not a real date';
+
+    // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+    $('form')
+        .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+        .on('change', 'select.required', validator.checkField)
+        .on('keypress', 'input[required][pattern]', validator.keypress);
+
+    $('.multi.required').on('keyup blur', 'input', function() {
+        validator.checkField.apply($(this).siblings().last()[0]);
+    });
+
+    $('form').submit(function(e) {
+        e.preventDefault();
+        var submit = true;
+
+        // evaluate the form using generic validaing
+        if (!validator.checkAll($(this))) {
+            submit = false;
+        }
+
+        if (submit)
+            this.submit();
+
+        return false;
+    });
+</script>
+<!-- /validator -->
+</body>
+</html>
+

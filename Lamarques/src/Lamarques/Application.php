@@ -68,7 +68,7 @@ class Application
             'action' => $action
         ];
         $class = "\\" . ucfirst($module) . "\\Controller\\" . ucfirst($controller) . "Controller";
-        $instancia = new $class($this->getConfig(), $this->getClient());
+        $instancia = new $class($this->getConfig(), $this->getClient(), $this->uri);
         $object = $action . 'Action';
         $instancia->$object();
 

@@ -15,10 +15,12 @@ class Uri
     private $uri;
     private $client;
     private $host;
+    public $href;
 
     public function __construct()
     {
         $uri = explode('/', $_SERVER['REQUEST_URI']);
+        $this->href = $_SERVER['REQUEST_URI'];
         if(isset($uri[1]))
             $this->setUri('module', $uri[1]);
         if(isset($uri[2]))

@@ -1,0 +1,56 @@
+<?php $this->layout('../template', ['menu' => $menu, 'sessao' => $sessao]) ?>
+<h1>Novo Menu</h1>
+<form action="/aplicacao/modulos/add/salvar" method="post" id="frmModulos" class="form-horizontal form-label-left"
+      novalidate>
+    <?php
+    /**
+     * @var \Aplicacao\Entity\SistemaModulos $modulo
+     */
+    ?>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="modulo">Modulo</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" name="modulo" id="modulo" class="form-control col-md-7 col-xs-12"
+                   value="<?= $modulo->getModulo() ?>"
+                   required="required">
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="menu">Menu</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" name="menu" id="menu" class="form-control col-md-7 col-xs-12"
+                   value="<?= $modulo->getMenu() ?>"
+                   required="required">
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="href">Href</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" name="href" id="href" class="form-control col-md-7 col-xs-12"
+                   value="<?= $modulo->getHref() ?>"
+                   required="required">
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="order">Ordem</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" name="ordem" id="ordem" class="form-control col-md-7 col-xs-12"
+                   value="<?= $modulo->getOrdem() ?>">
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exibir">Exibir no Menu</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="checkbox" name="exibir" id="exibir" class="form-control col-md-7 col-xs-12"
+                   <?php if ($modulo->isExibir()){ ?>checked<?php } ?>>
+        </div>
+    </div>
+    <div class="ln_solid"></div>
+    <div class="form-group">
+        <div class="col-md-6 col-md-offset-3">
+            <a href="/aplicacao/modulos" type="button" class="btn btn-primary" id="cancelar">Canelar</a>
+            <button type="submit" class="btn btn-success" id="enviar">Salvar</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="/public/vendors/validator/validator.js"></script>

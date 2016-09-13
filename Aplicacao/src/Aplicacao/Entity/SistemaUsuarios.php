@@ -18,7 +18,7 @@ class SistemaUsuarios
      * @ORM\Column(name="id_usuarios", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="sistema.usuarios_id_usuarios_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="sistema.usuarios_id_seq", allocationSize=1, initialValue=1)
      */
     private $idUsuarios;
 
@@ -89,6 +89,58 @@ class SistemaUsuarios
     {
         return $this->ativo;
     }
+
+    /**
+     * @param int $idUsuarios
+     * @return SistemaUsuarios
+     */
+    public function setIdUsuarios($idUsuarios)
+    {
+        $this->idUsuarios = $idUsuarios;
+        return $this;
+    }
+
+    /**
+     * @param string $usuario
+     * @return SistemaUsuarios
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+        return $this;
+    }
+
+    /**
+     * @param string $senha
+     * @return SistemaUsuarios
+     */
+    public function setSenha($senha)
+    {
+        $this->senha = md5($senha);
+        return $this;
+    }
+
+    /**
+     * @param string $email
+     * @return SistemaUsuarios
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @param boolean $ativo
+     * @return SistemaUsuarios
+     */
+    public function setAtivo($ativo)
+    {
+        $this->ativo = $ativo;
+        return $this;
+    }
+
+
 
 
 }
