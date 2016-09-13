@@ -1,8 +1,10 @@
 <?php $this->layout('../template', ['menu'=>$menu, 'sessao'=>$sessao]) ?>
 <h1>Listagem de Modulos</h1>
+<?php if($moduloEscrita): ?>
 <p>
     <a href="/aplicacao/modulos/add" class="btn btn-default">Novo Menu</a>
 </p>
+<?php endif; ?>
 <table class="table">
     <thead>
     <tr>
@@ -36,8 +38,10 @@
         </td>
         <td><?= $dado->getOrdem() ?></td>
         <td>
+            <?php if($moduloEscrita): ?>
             <a href="/aplicacao/modulos/edit/<?= $dado->getIdModulos() ?>"><i class="fa fa-pencil"></i></a>
             <a href="/aplicacao/modulos/delete/<?= $dado->getIdModulos() ?>" class="deletar"><i class="fa fa-trash"></i></a>
+            <?php endif; ?>
         </td>
     </tr>
     <?php endforeach; ?>
@@ -46,7 +50,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('.deletar').click(function() {
-            if(!confirm('Você tem certez que vai deletar esse menu')){
+            if(!confirm('Você tem certeza que vai deletar esse menu')){
                return false;
             }
             return true;

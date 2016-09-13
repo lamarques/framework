@@ -14,13 +14,16 @@ use Lamarques\Controller;
 
 class ModulosController extends Controller
 {
-    public function __construct(array $config, $client, $uri)
+    public function __construct(array $config, $client, $uri, $idModulos = 3)
     {
-        parent::__construct($config, $client, $uri);
+        parent::__construct($config, $client, $uri, $idModulos);
         $auth = new Authentication($this->getEm(), $this->getSessao());
         if(!$auth->isLogged()){
             $auth->logOf();
             header('location: /Aplicacao/Login');
+        }
+        if(!$this->isLeitura()){
+            header('location: /Aplicacao/Login/acessonegado');
         }
     }
 

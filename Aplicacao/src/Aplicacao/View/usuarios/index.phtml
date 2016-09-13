@@ -1,8 +1,10 @@
 <?php $this->layout('../template', ['menu'=>$menu, 'sessao'=>$sessao]) ?>
 <h1>Listagem de Usuários</h1>
+<?php if($moduloEscrita): ?>
 <p>
     <a class="btn btn-default" href="/aplicacao/usuarios/add">Novo Usuário</a>
 </p>
+<?php endif; ?>
 <table class="table">
     <thead>
     <tr>
@@ -32,10 +34,12 @@
             <?php endif;  ?>
             </td>
             <td>
+                <?php if($moduloEscrita): ?>
                 <a href="/aplicacao/permissoes/index/<?= $dado->getIdUsuarios() ?>"><i class="fa fa-key"></i></a>
                 <a href="/aplicacao/usuarios/password/<?= $dado->getIdUsuarios() ?>"><i class="fa fa-lock"></i></a>
                 <a href="/aplicacao/usuarios/edit/<?= $dado->getIdUsuarios() ?>"><i class="fa fa-pencil"></i></a>
                 <a href="/aplicacao/usuarios/delete/<?= $dado->getIdUsuarios() ?>" class="deletar"><i class="fa fa-trash"></i></a>
+                <?php endif; ?>
             </td>
         </tr>
     <?php endforeach; ?>

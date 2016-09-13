@@ -26,7 +26,11 @@ class Controller
 
     private $uri;
 
-    public function __construct(array $config, $client = 'default', Uri $uri)
+    public $leitura = false;
+    public $escrita = false;
+    public $especial = false;
+
+    public function __construct(array $config, $client = 'default', Uri $uri, $idModulo = false)
     {
         $this->setConfig($config);
         $this->view = new View($config['current_state']);
@@ -36,11 +40,20 @@ class Controller
         $sessao =  new Session($client);
         $this->sessao = $sessao;
         $this->uri = $uri;
+        $permissoesModulo = PermissoesAcesso::getPermissaoModulo($this->getEm(), $idModulo, $this->getSessao()->getSession());
+        if($permissoesModulo) {
+            $this->setLeitura($permissoesModulo->isLeitura())
+                ->setEscrita($permissoesModulo->isEscrita())
+                ->setEspecial($permissoesModulo->isEspecial());
+        }
         if($this->getSessao()->getSession()) {
             $menu = new Menu($this->getSessao()->getSession()['permissoes']);
             $this->menu = $menu->getMenu();
             $this->view->setGlobalData('menu', $this->menu);
             $this->view->setGlobalData('sessao', $this->getSessao()->getSession());
+            $this->view->setGlobalData('moduloLeitura', $this->isLeitura());
+            $this->view->setGlobalData('moduloEscrita', $this->isEscrita());
+            $this->view->setGlobalData('moduloEspecial', $this->isEspecial());
         }
     }
 
@@ -127,5 +140,60 @@ class Controller
         $entityManager = EntityManager::create($dbConfig, $config);
         $this->setEm($entityManager);
     }
+
+    /**
+     * @return boolean
+     */
+    public function isLeitura()
+    {
+        return $this->leitura;
+    }
+
+    /**
+     * @param boolean $leitura
+     * @return Controller
+     */
+    public function setLeitura($leitura)
+    {
+        $this->leitura = $leitura;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEscrita()
+    {
+        return $this->escrita;
+    }
+
+    /**
+     * @param boolean $escrita
+     * @return Controller
+     */
+    public function setEscrita($escrita)
+    {
+        $this->escrita = $escrita;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEspecial()
+    {
+        return $this->especial;
+    }
+
+    /**
+     * @param boolean $especial
+     * @return Controller
+     */
+    public function setEspecial($especial)
+    {
+        $this->especial = $especial;
+        return $this;
+    }
+
 
 }
